@@ -15,6 +15,35 @@
    Replace any "#" link with a real GitHub repo / live demo URL.
    ───────────────────────────────────────────────────────────── */
 const PROJECTS = {
+  '3_BvsgZOhW4': {
+    title: 'Guess Wrong Die !',
+    tech: ['Roblox Engine', 'Luau', 'State Machine', 'AI'],
+    body: [
+      { h: 'Overview', p: 'A 1v1 duel against an AI. You both sit across a table and pick one move each round — shoot, reload, or deflect — then reveal at the same time. Shooting needs a bullet, reloading leaves you open, deflect bounces a shot back. Guess wrong about what the other guy does and you take a hit. First to run out of health loses.' },
+      { h: 'The challenge', p: 'Making the mind-game feel fair instead of random. The rules for what beats what had to be tight, and the bot had to feel like a real opponent, not a coin flip. Most of the work was tuning that so a loss feels like you got outguessed, not cheated.' },
+      { h: 'How I built it', p: 'The match runs on a state machine — waiting, countdown, choosing, resolving, game over — handled on the server so it can\'t be cheated. The actual fight is one small function: give it both moves and bullet counts, it spits out the damage. Each move is its own module, and the bot\'s decision-making is a separate piece I can swap out later for harder difficulty. On top of that there\'s the polish — ragdoll on death, muzzle flash, sound, a coin economy with saved data, and a shop to buy and switch guns.' },
+    ],
+    code: {
+      lang: 'Luau',
+      text: `-- The whole fight in one pure function: moves + bullets -> damage
+local function resolve(p1, p2)
+    local d1, d2 = 0, 0
+    if p1.move == "shoot" and p1.bullets > 0 then
+        if p2.move == "deflect" then d1 = HIT      -- bounced back at shooter
+        elseif p2.move ~= "shoot" then d2 = HIT end -- reload/whiff -> p2 takes it
+    end
+    if p2.move == "shoot" and p2.bullets > 0 then
+        if p1.move == "deflect" then d2 = HIT
+        elseif p1.move ~= "shoot" then d1 = HIT end
+    end
+    return d1, d2
+end`,
+    },
+    links: [
+      { label: 'View Code', url: 'https://github.com/ujsain/GuessWrongDie', primary: true },
+    ],
+  },
+
   eNFfwNVrDO0: {
     title: 'Vehicle System',
     tech: ['Roblox Engine', 'Luau', 'Physics'],
