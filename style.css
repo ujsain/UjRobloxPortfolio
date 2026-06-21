@@ -679,6 +679,9 @@ section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
   gap: 0.6rem; margin-top: 0.9rem;
 }
 
+/* Hide the View Code button on the Guess Wrong Die card */
+.project-card[data-id="3_BvsgZOhW4"] .project-code-link { display: none; }
+
 .project-code-link {
   display: inline-flex; align-items: center; gap: 0.4rem;
   padding: 0.45rem 0.95rem;
