@@ -15,6 +15,17 @@
    Replace any "#" link with a real GitHub repo / live demo URL.
    ───────────────────────────────────────────────────────────── */
 const PROJECTS = {
+  LBIvO2eZOKY: {
+    title: 'Frag Boom !',
+    tech: ['Roblox Engine', 'Luau', 'Physics', 'State Machine'],
+    body: [
+      { h: 'Overview', p: 'Last man standing on a stack of breakable plates. Nobody has health — you throw bombs to delete the floor under people and shove them off. Grab mystery boxes for buffs like bigger blasts or triple volleys. Fall off, you\'re out.' },
+      { h: 'The challenge', p: 'Making the destruction real instead of a decal. Every blast recursively splits the plate until the hole matches the sphere, and since the plates have art on them, each fragment had to keep its own slice of the image — rotation-proof and deterministic.' },
+      { h: 'How I built it', p: 'The round runs on a phase state machine that knows nothing about the game — services just register for the phases they care about, so adding the map vote was a config edit. Bomb types are pure data off the model, so a new bomb is zero code. One fall watcher handles every elimination, with kill credit, coins and stats hanging off the event it fires. Plus bots, a shop, leaderboards and a win podium.' },
+    ],
+    links: [],
+  },
+
   '3_BvsgZOhW4': {
     title: 'Guess Wrong Die !',
     tech: ['Roblox Engine', 'Luau', 'State Machine', 'AI'],
@@ -89,36 +100,6 @@ end`,
     ],
     links: [
       { label: 'View Code', url: 'https://github.com/ujsain/The-Journey-Of-Zero', primary: true },
-    ],
-  },
-
-  'g_4jja5_s-A': {
-    title: 'Knife Combat & AI',
-    tech: ['Roblox Engine', 'Luau', 'State Machine', 'AI'],
-    body: [
-      { h: 'Overview', p: 'A knife combat system paired with AI bots that hunt, chase and attack the player — all driven by a clean finite state machine.' },
-      { h: 'The challenge', p: 'Bots needed to feel deliberate, not twitchy: smoothly transitioning between patrolling, chasing and attacking without getting stuck or flip-flopping between states.' },
-      { h: 'How I built it', p: 'Each bot runs a state machine (Idle → Patrol → Chase → Attack) with clear enter/update/exit hooks per state and transition guards based on distance and line of sight. Combat shares the same hitbox + cooldown logic the player uses, so behavior stays consistent.' },
-    ],
-    code: {
-      lang: 'Luau',
-      text: `-- Minimal FSM driving each bot
-local Bot = {}
-Bot.__index = Bot
-
-function Bot:setState(name)
-    if self.state == name then return end
-    if self.states[self.state] then self.states[self.state].exit(self) end
-    self.state = name
-    self.states[name].enter(self)
-end
-
-function Bot:update(dt)
-    self.states[self.state].update(self, dt)
-end`,
-    },
-    links: [
-      { label: 'View Code', url: '#' },
     ],
   },
 
