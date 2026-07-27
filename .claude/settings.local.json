@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "WebFetch(domain:melonlocal.com)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(git -C \"C:\\\\Users\\\\laxmi\\\\OneDrive\\\\Desktop\\\\Portfolio\\\\PersonalRobloxPortfolio\" remote -v)",
+      "Bash(git -C \"C:\\\\Users\\\\laxmi\\\\OneDrive\\\\Desktop\\\\Portfolio\\\\PersonalRobloxPortfolio\" log --oneline -3 origin/main)",
+      "mcp__roblox-studio__script_grep",
+      "mcp__roblox-studio__get_studio_state"
     ]
   }
 }

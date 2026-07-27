@@ -91,7 +91,7 @@ end`,
   },
 
   FfcwRnzSwo4: {
-    title: 'Math Game',
+    title: 'I Am Number',
     tech: ['Unity Engine', 'C#', '2D'],
     body: [
       { h: 'Overview', p: 'A 2D math game with a twist: you <em>are</em> a number, and that number is your weight. Bigger number, heavier you — so you tip seesaws, hold down switches, and shove open doors just by existing. You grow and shrink by grabbing and dropping digits as you play. It\'s math you <em>feel</em>, not math you get quizzed on.' },
@@ -186,6 +186,13 @@ end`,
     ],
   },
 };
+
+// ─── Open the page at the Projects section ───
+// Skip when the URL targets a specific section (e.g. #about)
+if (!location.hash) {
+  history.scrollRestoration = 'manual';
+  document.getElementById('projects').scrollIntoView({ behavior: 'instant' });
+}
 
 // ─── Navbar scroll effect ───
 const navbar = document.getElementById('navbar');
