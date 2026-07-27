@@ -212,9 +212,9 @@ document.querySelectorAll('.nav-links a').forEach(a => {
   });
 });
 
-// ─── Copy email to clipboard ───
-function copyEmail(el) {
-  navigator.clipboard.writeText('ujjsaini@gmail.com');
+// ─── Copy contact handle (email, discord, …) to clipboard ───
+function copyText(el, text) {
+  navigator.clipboard.writeText(text);
   const arrow = el.querySelector('.contact-link-arrow');
   const original = arrow.textContent;
   arrow.textContent = '✓';
