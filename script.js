@@ -214,7 +214,11 @@ document.querySelectorAll('.nav-links a').forEach(a => {
 
 // ─── Copy contact handle (email, discord, …) to clipboard ───
 function copyText(el, text) {
-  navigator.clipboard.writeText(text);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
   const arrow = el.querySelector('.contact-link-arrow');
   const original = arrow.textContent;
   arrow.textContent = '✓';
@@ -223,6 +227,18 @@ function copyText(el, text) {
     arrow.textContent = original;
     arrow.style.color = '';
   }, 1800);
+}
+
+// Clipboard API fallback for browsers/contexts where it's unavailable
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  ta.remove();
 }
 
 // ─── Scroll reveal animations ───
