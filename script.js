@@ -114,17 +114,15 @@ end`,
     links: [],
   },
 
-  '01Fkofs51dQ': {
-    title: 'Snake Game + RL AI',
-    tech: ['Unity Engine', 'C#', 'Reinforcement Learning', 'ML-Agents'],
+  'QuEuLtu-Yf0': {
+    title: 'Golf BOOM!',
+    tech: ['Roblox Engine', 'Lua', 'Gameplay Systems'],
     body: [
-      { h: 'Overview', p: 'A Snake game built in Unity, then turned into an AI playground. The snakes steer continuously (Slither.io-style, not the grid version), and I trained reinforcement-learning agents to drive them — chasing food, dodging walls, and avoiding each other in a shared arena.' },
-      { h: 'The challenge', p: 'The agent never gets told where the food is. Each snake "sees" through 20 raycasts fanning out in front of it, each reporting what it\'s looking at — food, a wall, or a rival snake — and how far. Turning that raw vision into smart movement, with nothing but a single steering output and a sparse reward, was the hard part.' },
-      { h: 'How I built it', p: 'Each snake observes its raycasts plus its own position, and acts through one continuous steer while always moving forward. Rewards are dead simple: +3 for eating, −2 for hitting a wall, −3 for crashing into another snake. I trained it with PPO in ML-Agents over a couple million steps, then exported to ONNX to run in-game. Several snakes share the arena and compete, so they learn to handle a board that\'s always moving — not a static one.' },
+      { h: 'Overview', p: 'A chaotic multiplayer golf game. Up to 60 players race to sink shots across timed rounds, while throwing fireballs and cannons at each other to mess up their swings.' },
+      { h: 'The challenge', p: 'Getting golf to feel arcade, not realistic. Roblox\'s default physics makes the ball fast and heavy, so I wrote custom gravity, drag and backspin to get slow floaty arcs. The other tricky part was layering combat on top of golf without breaking the round or score logic.' },
+      { h: 'How I built it', p: 'Built this the agentic way — used Opus 4.5 for about 80% of the systems, then tuned the feel myself: swing timing, trajectory preview, off-screen ball indicators, and the gag where a ball smacks someone in the head. Also learned a lot about Roblox engine limits compared to Unity.' },
     ],
-    links: [
-      { label: 'View Code', url: 'https://github.com/ujsain/SnakeGame', primary: true },
-    ],
+    links: [],
   },
 
   fpLVqa5t63E: {
