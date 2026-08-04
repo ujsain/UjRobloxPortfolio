@@ -185,13 +185,6 @@ end`,
   },
 };
 
-// ─── Open the page at the Projects section ───
-// Skip when the URL targets a specific section (e.g. #about)
-if (!location.hash) {
-  history.scrollRestoration = 'manual';
-  document.getElementById('projects').scrollIntoView({ behavior: 'instant' });
-}
-
 // ─── Navbar scroll effect ───
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
