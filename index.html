@@ -20,7 +20,7 @@
   <div class="nav-links" id="navLinks">
     <a href="#home">Home</a>
     <a href="#projects">Projects</a>
-    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
     <a href="#contact" class="nav-cta">Get in Touch</a>
   </div>
   <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
@@ -41,14 +41,9 @@
       <div class="dot"></div>
       i love programming
     </div>
-    <h1>Ujjawal <span class="accent">Saini</span></h1>
+    <h1><span class="hero-name-line">Ujjawal</span><span class="hero-name-line hero-name-grad">Saini</span></h1>
     <div class="hero-role">Game Developer</div>
-    <p>I build clean, scalable gameplay code — combat, physics, AI and the systems that hold a game together. 4+ years across Unity, Roblox and C#.</p>
-    <div class="hero-btns">
-      <a href="#projects" class="btn btn-primary">View Projects</a>
-      <a href="#contact" class="btn btn-secondary">Get in Touch →</a>
-    </div>
-    <div class="scroll-indicator">Scroll</div>
+    <p class="hero-quote">I build mobile games that <span class="hl-cyan">millions of people</span> actually open — casual hits and match-3 puzzles on Android, and <span class="hl-violet">Roblox worlds</span> with real shops and economies inside them.</p>
   </section>
   <!-- Tech divider: hero → projects -->
   <div class="wave-divider">
@@ -224,48 +219,82 @@
   </div>
 </div>
 
-<!-- ═══ ABOUT ═══ -->
+<!-- ═══ EXPERIENCE ═══ -->
 <div class="section-wrap section-warm">
-  <section id="about">
+  <section id="experience">
     <div class="reveal">
-      <div class="section-label">About Me</div>
-      <h2 class="section-title">A bit about me</h2>
+      <div class="section-label">Career Log</div>
+      <h2 class="section-title">Work Experience</h2>
     </div>
-    <div class="about-content">
-      <div class="reveal">
-        <div class="about-stats">
-          <div class="stat">
-            <div class="stat-value" data-count="4">0+</div>
-            <div class="stat-label">Years Coding Games</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value" data-count="10">0+</div>
-            <div class="stat-label">Games & Systems Built</div>
-          </div>
-        </div>
-        <div class="about-text">
-          <p>Hey, I'm <strong>Ujjawal Saini</strong> — a game developer who's been building for over 4 years, from solo passion projects to larger collaborative games.</p>
-          <p>I work across both gameplay and the architecture underneath it — smooth UI systems, robust server logic, AI behavior, and the physics and combat that make a game feel alive. I genuinely enjoy taking a messy idea and turning it into clean, well-structured code.</p>
-          <p>Right now I'm <strong>looking for a game developer role</strong> where I can keep growing, ship real products, and work with a team that cares about quality. If that sounds like a fit, I'd love to talk.</p>
-        </div>
+
+    <div class="timeline" id="timeline">
+      <div class="timeline-track"></div>
+      <div class="timeline-progress" id="timelineProgress"></div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-node"></div>
+        <div class="timeline-date">Feb 2025 — Present</div>
+        <h3 class="timeline-role">Roblox Creator</h3>
+        <div class="timeline-org">Independent / Commission</div>
+        <ul class="timeline-points">
+          <li>Built full cyberpunk UI systems from scratch — menus, HUD, inventory, and shop — pixel-perfect and driven by custom effects.</li>
+          <li>Wrote the backend behind them: leaderboards, purchase logic, and persistent player data on ProfileService, built to survive sessions and scale.</li>
+          <li>Shipped clean, maintainable codebases solo and alongside clients, tuned to hand off without a mess to maintain.</li>
+        </ul>
       </div>
-      <div class="tech-stack reveal">
-        <h4>Tech Stack — Tools I Work With</h4>
-        <div class="tech-tags">
-          <span class="tech-tag">Unity Engine</span>
-          <span class="tech-tag">Roblox Engine</span>
-          <span class="tech-tag">Unreal Engine</span>
-          <span class="tech-tag">C#</span>
-          <span class="tech-tag">C++</span>
-          <span class="tech-tag">Luau</span>
-          <span class="tech-tag">ML-Agents / RL</span>
-          <span class="tech-tag">Git</span>
-          <span class="tech-tag">VS Code</span>
-          <span class="tech-tag">Knit</span>
-          <span class="tech-tag">ProfileService</span>
-        </div>
-        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 1rem;">And more, picked up as projects need them.</p>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-node"></div>
+        <div class="timeline-date">Feb 2025 — Mar 2026</div>
+        <h3 class="timeline-role">Unity Developer</h3>
+        <div class="timeline-org">Audify</div>
+        <ul class="timeline-points">
+          <li>Shipped gameplay and systems across live mobile titles — Football World, Bus Jam, and Tile Match — reaching 10M+ players.</li>
+          <li>Built UI systems and internal tools that cut friction and sped the whole team up.</li>
+          <li>Optimized performance for low-end Android, and learned first-hand how a mobile game actually grows from 0 to 1.</li>
+        </ul>
       </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-node"></div>
+        <div class="timeline-date">Aug 2024 — Jan 2025</div>
+        <h3 class="timeline-role">Unity Programmer Intern</h3>
+        <div class="timeline-org">Flying Ant Studios</div>
+        <ul class="timeline-points">
+          <li>Built mid-core, casual, and educational games in Unity across the full stack.</li>
+          <li>Cut WebGL build size by 70% through deep performance work — smaller downloads, faster loads.</li>
+          <li>Designed and shipped a fully interactive educational game entirely on my own.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-node"></div>
+        <div class="timeline-date">2022 — 2025</div>
+        <h3 class="timeline-role">BSc Computer Applications</h3>
+        <div class="timeline-org">Chaudhary Charan Singh University</div>
+        <ul class="timeline-points">
+          <li>Bachelor of Computer Applications — 1st division, with a scholarship.</li>
+          <li>Participated in various hackathons and game jams.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tech-stack reveal">
+      <h4>Tech Stack — Tools I Work With</h4>
+      <div class="tech-tags">
+        <span class="tech-tag">Unity Engine</span>
+        <span class="tech-tag">Roblox Engine</span>
+        <span class="tech-tag">Unreal Engine</span>
+        <span class="tech-tag">C#</span>
+        <span class="tech-tag">C++</span>
+        <span class="tech-tag">Luau</span>
+        <span class="tech-tag">ML-Agents / RL</span>
+        <span class="tech-tag">Git</span>
+        <span class="tech-tag">VS Code</span>
+        <span class="tech-tag">Knit</span>
+        <span class="tech-tag">ProfileService</span>
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 1rem;">And more, picked up as projects need them.</p>
     </div>
   </section>
   <!-- Tech divider: about → contact -->

@@ -253,28 +253,29 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// ─── Animated stat counters ───
-const statObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const el = entry.target;
-      const target = parseInt(el.dataset.count);
-      let current = 0;
-      const step = Math.ceil(target / 30);
-      const interval = setInterval(() => {
-        current += step;
-        if (current >= target) {
-          current = target;
-          clearInterval(interval);
-        }
-        el.textContent = current + '+';
-      }, 40);
-      statObserver.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
+// ─── Experience timeline: neon line draws in as you scroll ───
+const timeline = document.getElementById('timeline');
+const timelineProgress = document.getElementById('timelineProgress');
+if (timeline && timelineProgress) {
+  const timelineItems = timeline.querySelectorAll('.timeline-item');
 
-document.querySelectorAll('.stat-value').forEach(el => statObserver.observe(el));
+  function updateTimeline() {
+    const rect = timeline.getBoundingClientRect();
+    // The line's tip tracks a point ~70% down the viewport
+    const tip = window.innerHeight * 0.7 - rect.top;
+    const progress = Math.min(Math.max(tip, 0), timeline.offsetHeight);
+    timelineProgress.style.height = progress + 'px';
+
+    // Light up each node the moment the line reaches it
+    timelineItems.forEach(item => {
+      item.classList.toggle('lit', item.offsetTop + 10 <= progress);
+    });
+  }
+
+  window.addEventListener('scroll', updateTimeline, { passive: true });
+  window.addEventListener('resize', updateTimeline);
+  updateTimeline();
+}
 
 // ─── Adaptive video loading ───
 // Detect if device can handle inline video previews
