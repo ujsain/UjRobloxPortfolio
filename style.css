@@ -211,6 +211,7 @@ nav.scrolled { border-bottom-color: rgba(34, 217, 238, 0.2); }
   padding: 6rem 2rem 4rem;
   /* Line the content up with the 1100px section container below */
   padding-left: max(2rem, calc((100vw - 1100px) / 2));
+  padding-right: max(2rem, calc((100vw - 1100px) / 2));
   position: relative;
   text-align: left;
   color: var(--text-on-dark);
@@ -294,14 +295,40 @@ nav.scrolled { border-bottom-color: rgba(34, 217, 238, 0.2); }
 
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 5.5vw, 4.6rem);
+  /* Sized so each line always fits on one row on desktop —
+     Orbitron is wide, so the cap is lower than it looks */
+  font-size: clamp(2.2rem, 5vw, 3.7rem);
   font-weight: 800; line-height: 1.12;
   letter-spacing: 0.01em;
-  max-width: 900px;
   margin-bottom: 1.25rem;
-  animation: fadeInUp 0.6s ease-out 0.1s both;
   position: relative; z-index: 2;
   color: var(--text-on-dark);
+}
+
+.hero h1 .h1-line { display: block; }
+
+/* On desktop the two headline lines never break internally */
+@media (min-width: 769px) {
+  .hero h1 .h1-line { white-space: nowrap; }
+}
+
+/* Typewriter reveal — chars are wrapped in .ch spans by script.js,
+   so the layout is final from frame one (no reflow while typing) */
+.hero h1 .ch { visibility: hidden; }
+.hero h1 .ch.on { visibility: visible; }
+
+.type-caret {
+  display: inline-block;
+  width: 0.08em; height: 0.8em;
+  margin-right: -0.08em; /* zero net width — never shifts the layout */
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+  transform: translateY(0.08em);
+  animation: caretBlink 0.9s steps(2, start) infinite;
+}
+
+@keyframes caretBlink {
+  50% { opacity: 0; }
 }
 .hero-name-grad {
   background: linear-gradient(95deg, var(--accent) 0%, var(--accent-warm) 55%, #ff4ecd 100%);
@@ -351,6 +378,51 @@ nav.scrolled { border-bottom-color: rgba(34, 217, 238, 0.2); }
   color: var(--accent-warm);
   font-weight: 500;
 }
+
+/* ─── Hero stat strip ─── */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  width: 100%;
+  margin-top: 1.5rem;
+  background: var(--border);
+  border: 1px solid var(--border);
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+  position: relative; z-index: 2;
+}
+
+.hero-stat {
+  background: rgba(10, 16, 29, 0.85);
+  padding: 0.85rem 1.1rem 0.9rem;
+  border-top: 2px solid var(--accent);
+}
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.2rem;
+}
+
+.hero-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  line-height: 1.55;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.stat-cyan { border-top-color: var(--accent); }
+.stat-cyan .hero-stat-num { color: var(--accent); }
+.stat-violet { border-top-color: var(--accent-warm); }
+.stat-violet .hero-stat-num { color: var(--accent-warm); }
+.stat-pink { border-top-color: #ff4ecd; }
+.stat-pink .hero-stat-num { color: #ff4ecd; }
+.stat-gold { border-top-color: var(--accent-gold); }
+.stat-gold .hero-stat-num { color: var(--accent-gold); }
 
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -1115,8 +1187,10 @@ footer a:hover { color: #52e4f5; text-shadow: 0 0 12px var(--accent-glow-strong)
   .toolkit-grid { grid-template-columns: 1fr; }
   .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
   .wave-divider svg { height: 32px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 500px) {
   .portfolio-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
 }

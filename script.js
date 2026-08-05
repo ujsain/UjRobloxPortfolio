@@ -185,6 +185,68 @@ end`,
   },
 };
 
+// ─── Hero headline typewriter ───
+// Wraps every character in a hidden span, then reveals them one by one
+// with a blinking caret. Layout never shifts because all chars exist
+// (invisible) from the start.
+const heroTitle = document.querySelector('.hero h1');
+if (heroTitle) {
+  const chars = [];
+  (function wrapChars(node) {
+    [...node.childNodes].forEach(child => {
+      if (child.nodeType === Node.TEXT_NODE) {
+        const frag = document.createDocumentFragment();
+        for (const ch of child.textContent) {
+          const s = document.createElement('span');
+          s.className = 'ch';
+          s.textContent = ch;
+          frag.appendChild(s);
+          chars.push(s);
+        }
+        child.replaceWith(frag);
+      } else if (child.nodeType === Node.ELEMENT_NODE && child.tagName !== 'BR') {
+        wrapChars(child);
+      }
+    });
+  })(heroTitle);
+
+  const caret = document.createElement('span');
+  caret.className = 'type-caret';
+
+  let typeIdx = 0;
+  function typeNext() {
+    if (typeIdx < chars.length) {
+      const ch = chars[typeIdx++];
+      ch.classList.add('on');
+      ch.after(caret); // caret rides along behind the last typed char
+      setTimeout(typeNext, ch.textContent === ' ' ? 30 : 55);
+    } else {
+      setTimeout(() => caret.remove(), 1800); // blink a moment, then clean up
+    }
+  }
+  setTimeout(typeNext, 350);
+}
+
+// ─── Hero stat count-up ───
+// Numbers roll from 0 to their target as the strip fades in.
+document.querySelectorAll('.hero-stat-num[data-count]').forEach((el, i) => {
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  el.textContent = '0' + suffix; // avoid a flash of the final value
+
+  setTimeout(() => {
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3); // ease-out, fast start then settle
+      el.textContent = Math.round(target * eased) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }, 450 + i * 150); // stagger left → right, starting as the strip appears
+});
+
 // ─── Navbar scroll effect ───
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
