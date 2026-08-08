@@ -382,7 +382,7 @@ nav.scrolled { border-bottom-color: rgba(34, 217, 238, 0.2); }
 /* ─── Hero stat strip ─── */
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   width: 100%;
   margin-top: 1.5rem;
