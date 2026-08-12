@@ -7,7 +7,9 @@
       "Bash(git -C \"C:\\\\Users\\\\laxmi\\\\OneDrive\\\\Desktop\\\\Portfolio\\\\PersonalRobloxPortfolio\" log --oneline -3 origin/main)",
       "mcp__roblox-studio__script_grep",
       "mcp__roblox-studio__get_studio_state",
-      "PowerShell(Get-ChildItem *)"
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell($f = \"C:\\\\Users\\\\laxmi\\\\OneDrive\\\\Desktop\\\\Portfolio\\\\PersonalRobloxPortfolio\\\\saveweb2zip-com-igottic-com\\\\index.html\"; \\(Get-Item $f\\).Length; $s = Get-Content $f -Raw; $s.Substring\\(0, [Math]::Min\\(6000, $s.Length\\)\\))",
+      "PowerShell(\\(Get-Item \"index.html\"\\).Length; \\(Get-Item \"style.css\"\\).Length; \\(Get-Item \"script.js\"\\).Length; \\(Get-Item \"saveweb2zip-com-igottic-com\\\\images\\\\bg.jpg\"\\).Length)"
     ]
   }
 }
