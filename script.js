@@ -274,7 +274,7 @@ document.querySelectorAll('.hero-stat-num[data-count]').forEach((el, i) => {
     if (n >= 1e3) return Math.round(n / 1e3) + 'K';
     return n;
   };
-  const fmt = target >= 1e6 ? compact : (n => n);
+  const fmt = target >= 1e6 ? compact : (n => n.toLocaleString('en-US'));
 
   el.textContent = '0' + suffix; // avoid a flash of the final value
 
