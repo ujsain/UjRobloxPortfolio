@@ -899,6 +899,17 @@ section { padding: 2.25rem 2rem; max-width: 1100px; margin: 0 auto; position: re
   color: var(--accent);
 }
 
+/* Education heading, sitting between the two timelines */
+.edu-head { margin-top: 3.5rem; }
+
+/* Single-entry timeline: no rail to draw, so the node is simply always lit */
+.timeline-plain .timeline-node {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow-strong);
+}
+.timeline-plain .timeline-date { color: var(--accent); }
+
 /* ─── Skills toolkit panel ─── */
 .toolkit { margin-top: 2.5rem; }
 

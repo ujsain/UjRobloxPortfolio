@@ -352,22 +352,26 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// ─── Experience timeline: neon line draws in as you scroll ───
-const timeline = document.getElementById('timeline');
-const timelineProgress = document.getElementById('timelineProgress');
-if (timeline && timelineProgress) {
-  const timelineItems = timeline.querySelectorAll('.timeline-item');
+// ─── Timelines (experience, education): neon line draws in as you scroll ───
+const timelines = [...document.querySelectorAll('.timeline')].map(el => ({
+  el,
+  progress: el.querySelector('.timeline-progress'),
+  items: el.querySelectorAll('.timeline-item'),
+})).filter(t => t.progress);
 
+if (timelines.length) {
   function updateTimeline() {
-    const rect = timeline.getBoundingClientRect();
-    // The line's tip tracks a point ~70% down the viewport
-    const tip = window.innerHeight * 0.7 - rect.top;
-    const progress = Math.min(Math.max(tip, 0), timeline.offsetHeight);
-    timelineProgress.style.height = progress + 'px';
+    timelines.forEach(({ el, progress, items }) => {
+      const rect = el.getBoundingClientRect();
+      // The line's tip tracks a point ~70% down the viewport
+      const tip = window.innerHeight * 0.7 - rect.top;
+      const drawn = Math.min(Math.max(tip, 0), el.offsetHeight);
+      progress.style.height = drawn + 'px';
 
-    // Light up each node the moment the line reaches it
-    timelineItems.forEach(item => {
-      item.classList.toggle('lit', item.offsetTop + 10 <= progress);
+      // Light up each node the moment the line reaches it
+      items.forEach(item => {
+        item.classList.toggle('lit', item.offsetTop + 10 <= drawn);
+      });
     });
   }
 
