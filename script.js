@@ -65,29 +65,15 @@ end`,
     ],
   },
 
-  qHz2qdRn9FQ: {
-    title: 'HoverBoard Mechanics',
-    tech: ['Roblox Engine', 'Luau', 'Physics'],
+  gh4Y8P1VXSk: {
+    title: '1 IQ vs 9999 IQ',
+    tech: ['Roblox Engine', 'Lua', 'Game Architecture'],
     body: [
-      { h: 'Overview', p: 'Smooth hoverboard movement — the board floats above the ground, tilts into turns, and bobs naturally as the player rides.' },
-      { h: 'The challenge', p: 'Hovering looks simple but feels terrible if the float is rigid. The trick was making the ride feel weightless and responsive without the board clipping into terrain or jittering.' },
-      { h: 'How I built it', p: 'A raycast samples the ground height each frame and feeds a spring force that holds the board at a target hover height, with damping to kill oscillation. Tilt is driven by velocity so the board leans into movement.' },
+      { h: 'Overview', p: 'A head-to-head brain-battle game — two players sit at a shared table, get the same puzzle, and race to solve it. Winning earns IQ (the game\'s currency), which feeds into leaderboards, chair unlocks, rebirths and steal mechanics. Ten minigames wired in: Maze, Untangle, StopTimer, PipeConnect, NumberSort, PatternMemory, TicTacToe, WordSearch, PipeFlow and OddColor.' },
+      { h: 'The challenge', p: 'Keeping the duel engine clean while it juggles a lot at once — shared puzzle state, synced countdowns, race vs. score win modes, forfeits, AFK timeouts, and runtime cosmetic chair-swaps that can\'t be allowed to break an active match. The trick was hiding all of that behind the right abstractions so game logic never touches raw seats or physical chairs.' },
+      { h: 'How I built it', p: 'The core design decisions are the interesting part: a Station layer that hides which seat is in use so chairs swap mid-game, auto-grouped arenas so duplicating a table folder "just works" with zero config, a single audited path for the IQ economy, and a folder-convention registry so adding a minigame needs no wiring edits.' },
     ],
-    code: {
-      lang: 'Luau',
-      text: `-- Spring-damper that keeps the board floating at HOVER_HEIGHT
-local hit = workspace:Raycast(board.Position, Vector3.new(0, -10, 0), params)
-if hit then
-    local distance = (board.Position - hit.Position).Y
-    local offset   = HOVER_HEIGHT - distance
-    local velocityY = board.AssemblyLinearVelocity.Y
-    local force = (offset * STIFFNESS) - (velocityY * DAMPING)
-    board:ApplyImpulse(Vector3.new(0, force * board.AssemblyMass, 0))
-end`,
-    },
-    links: [
-      { label: 'View Code', url: '#' },
-    ],
+    links: [],
   },
 
   FfcwRnzSwo4: {
@@ -280,6 +266,16 @@ if (heroTitle) {
 document.querySelectorAll('.hero-stat-num[data-count]').forEach((el, i) => {
   const target = parseFloat(el.dataset.count);
   const suffix = el.dataset.suffix || '';
+
+  // Targets of 1M+ roll in compact form (250K → 800K → 1M) so the
+  // animation stays readable instead of spelling out seven digits.
+  const compact = n => {
+    if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+    if (n >= 1e3) return Math.round(n / 1e3) + 'K';
+    return n;
+  };
+  const fmt = target >= 1e6 ? compact : (n => n);
+
   el.textContent = '0' + suffix; // avoid a flash of the final value
 
   setTimeout(() => {
@@ -288,7 +284,7 @@ document.querySelectorAll('.hero-stat-num[data-count]').forEach((el, i) => {
     function tick(now) {
       const t = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - t, 3); // ease-out, fast start then settle
-      el.textContent = Math.round(target * eased) + suffix;
+      el.textContent = fmt(Math.round(target * eased)) + suffix;
       if (t < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
