@@ -227,6 +227,66 @@ if (heroTitle) {
   setTimeout(typeNext, 350);
 }
 
+// ─── Section-title typewriter ───
+// Same typed-in reveal as the hero headline, but for section titles
+// ("Projects", "Work Experience", "My Skills", "Let's Talk").
+// Each title types itself the first time it scrolls into view.
+(() => {
+  const targets = document.querySelectorAll('.section-title, .toolkit-head h4');
+  if (!targets.length) return;
+
+  // Pre-wrap every character in a hidden span so layout never shifts
+  targets.forEach(el => {
+    const chars = [];
+    (function wrapChars(node) {
+      [...node.childNodes].forEach(child => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const frag = document.createDocumentFragment();
+          for (const ch of child.textContent) {
+            const s = document.createElement('span');
+            s.className = 'ch';
+            s.textContent = ch;
+            frag.appendChild(s);
+            chars.push(s);
+          }
+          child.replaceWith(frag);
+        } else if (child.nodeType === Node.ELEMENT_NODE && child.tagName !== 'BR') {
+          wrapChars(child);
+        }
+      });
+    })(el);
+    el._typeChars = chars;
+  });
+
+  function startTyping(el) {
+    const chars = el._typeChars || [];
+    const caret = document.createElement('span');
+    caret.className = 'type-caret';
+    let i = 0;
+    (function next() {
+      if (i < chars.length) {
+        const ch = chars[i++];
+        ch.classList.add('on');
+        ch.after(caret); // caret rides along behind the last typed char
+        setTimeout(next, ch.textContent === ' ' ? 30 : 60);
+      } else {
+        setTimeout(() => caret.remove(), 1200);
+      }
+    })();
+  }
+
+  const titleObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        titleObserver.unobserve(entry.target);
+        startTyping(entry.target);
+      }
+    });
+  }, { threshold: 0.5, rootMargin: '0px 0px -40px 0px' });
+
+  targets.forEach(el => titleObserver.observe(el));
+})();
+
 // ─── Hero stat count-up ───
 // Numbers roll from 0 to their target as the strip fades in.
 document.querySelectorAll('.hero-stat-num[data-count]').forEach((el, i) => {
