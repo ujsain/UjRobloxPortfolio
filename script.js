@@ -186,9 +186,8 @@ end`,
 };
 
 // ─── Hero headline typewriter ───
-// Wraps every character in a hidden span, then reveals them one by one
-// with a blinking caret. Layout never shifts because all chars exist
-// (invisible) from the start.
+// Wraps every character in a hidden span, then reveals them one by one.
+// Layout never shifts because all chars exist (invisible) from the start.
 const heroTitle = document.querySelector('.hero h1');
 if (heroTitle) {
   const chars = [];
@@ -210,18 +209,12 @@ if (heroTitle) {
     });
   })(heroTitle);
 
-  const caret = document.createElement('span');
-  caret.className = 'type-caret';
-
   let typeIdx = 0;
   function typeNext() {
     if (typeIdx < chars.length) {
       const ch = chars[typeIdx++];
       ch.classList.add('on');
-      ch.after(caret); // caret rides along behind the last typed char
       setTimeout(typeNext, ch.textContent === ' ' ? 30 : 55);
-    } else {
-      setTimeout(() => caret.remove(), 1800); // blink a moment, then clean up
     }
   }
   setTimeout(typeNext, 350);
@@ -260,17 +253,12 @@ if (heroTitle) {
 
   function startTyping(el) {
     const chars = el._typeChars || [];
-    const caret = document.createElement('span');
-    caret.className = 'type-caret';
     let i = 0;
     (function next() {
       if (i < chars.length) {
         const ch = chars[i++];
         ch.classList.add('on');
-        ch.after(caret); // caret rides along behind the last typed char
         setTimeout(next, ch.textContent === ' ' ? 30 : 60);
-      } else {
-        setTimeout(() => caret.remove(), 1200);
       }
     })();
   }
