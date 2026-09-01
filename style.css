@@ -170,12 +170,13 @@ nav.scrolled { border-bottom-color: rgba(61, 220, 151, 0.2); }
    ═══════════════════════════════════════ */
 
 .hero {
-  min-height: 85vh; display: flex; flex-direction: column;
+  min-height: 0; display: flex; flex-direction: column;
   justify-content: center; align-items: flex-start;
-  padding: 6rem 2rem 4rem;
-  /* Line the content up with the 1100px section container below */
-  padding-left: max(2rem, calc((100vw - 1100px) / 2));
-  padding-right: max(2rem, calc((100vw - 1100px) / 2));
+  padding: 8rem 2rem 2.5rem;
+  /* .hero is a <section>, so it already gets max-width:1100px + margin:auto
+     and the same 2rem side padding as every other section — that lines the
+     text up exactly with "Games Contributed" / "Personal Projects" below. */
+  max-width: 1100px;
   position: relative;
   text-align: left;
   color: var(--text-on-dark);
@@ -334,50 +335,140 @@ nav.scrolled { border-bottom-color: rgba(61, 220, 151, 0.2); }
   font-weight: 500;
 }
 
-/* ─── Hero stat strip ─── */
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
+/* ═══════════════════════════════════════
+   GAMES CONTRIBUTED — scrolling marquee
+   (cards match the Projects grid; track stays
+   inside the 1100px container)
+   ═══════════════════════════════════════ */
+#games { padding-top: 1.5rem; }
+
+.games-marquee {
+  position: relative;
   width: 100%;
-  margin-top: 1.5rem;
-  background: var(--border);
+  overflow: hidden;
+  padding: 0.75rem 0 1.25rem;
+  /* Soft fade on both edges so cards slide in/out inside the container */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+/* Scrolling is driven from script.js (auto-scroll + wheel + drag);
+   the track holds two identical groups so wrapping at one group width loops seamlessly */
+.games-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.games-marquee { cursor: grab; touch-action: pan-y; user-select: none; }
+.games-marquee.is-dragging { cursor: grabbing; }
+.games-marquee.is-dragging .game-card { pointer-events: none; }
+.games-track img { -webkit-user-drag: none; user-drag: none; }
+
+.games-group {
+  display: flex;
+  gap: 1.25rem;
+  padding-right: 1.25rem; /* keeps the gap consistent at the seam */
+}
+
+.game-card {
+  width: 344px;
+  flex-shrink: 0;
+  display: flex; flex-direction: column;
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
-  animation: fadeInUp 0.6s ease-out 0.3s both;
-  position: relative; z-index: 2;
-}
-
-.hero-stat {
-  background: rgba(19, 24, 27, 0.75);
-  padding: 0.85rem 1.1rem 0.9rem;
   border-top: 2px solid var(--accent);
+  border-radius: 4px; overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+  transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
+}
+.game-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 24px var(--accent-glow);
+}
+.game-mobile { border-top-color: var(--accent-warm); }
+.game-mobile:hover { border-color: var(--accent-warm); box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 24px var(--accent-warm-glow); }
+
+/* Thumb: blurred cover behind, full art contained in front (game icons are square) */
+.game-thumb {
+  width: 100%; aspect-ratio: 16/10;
+  position: relative; overflow: hidden;
+  background: var(--bg-card);
+}
+.game-thumb img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.game-thumb .game-thumb-bg { object-fit: cover; filter: blur(18px) saturate(1.2) brightness(0.55); transform: scale(1.2); }
+.game-thumb .game-thumb-art { object-fit: contain; transition: transform 0.5s; }
+.game-card:hover .game-thumb-art { transform: scale(1.04); }
+
+/* Platform badge on the thumb */
+.game-badge {
+  position: absolute; top: 0.7rem; left: 0.7rem; z-index: 2;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.3rem 0.6rem; border-radius: 2px;
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-primary);
+  background: rgba(19, 24, 27, 0.8);
+  border: 1px solid var(--border-hover);
+  backdrop-filter: blur(4px);
+}
+.game-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.game-mobile .game-badge .dot { background: var(--accent-warm); box-shadow: 0 0 8px var(--accent-warm); }
+
+.game-info { padding: 1.1rem 1.25rem 1.2rem; display: flex; flex-direction: column; flex: 1; }
+.game-name {
+  font-size: 1rem; font-weight: 600;
+  color: var(--text-on-dark);
+  margin-bottom: 0.7rem;
 }
 
-.hero-stat-num {
+.game-stats {
+  display: flex; gap: 1.6rem;
+  padding-bottom: 0.8rem; margin-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+.game-stat-num {
   font-family: var(--font-ui);
-  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
-  font-weight: 900;
-  line-height: 1.2;
-  margin-bottom: 0.2rem;
+  font-size: 1.55rem; font-weight: 900; line-height: 1.1;
+  color: var(--accent);
+}
+.game-mobile .game-stat-num { color: var(--accent-warm); }
+.game-stat-label {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-muted); margin-top: 0.15rem;
 }
 
-.hero-stat-label {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  line-height: 1.55;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+.game-blurb {
+  font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
 }
+.game-more {
+  margin-top: auto; padding-top: 0.9rem;
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent);
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  transition: gap 0.25s;
+}
+.game-mobile .game-more { color: var(--accent-warm); }
+.game-card:hover .game-more { gap: 0.7rem; }
 
-.stat-cyan { border-top-color: var(--accent); }
-.stat-cyan .hero-stat-num { color: var(--accent); }
-.stat-violet { border-top-color: var(--accent-warm); }
-.stat-violet .hero-stat-num { color: var(--accent-warm); }
-.stat-pink { border-top-color: #FFC857; }
-.stat-pink .hero-stat-num { color: #FFC857; }
-.stat-gold { border-top-color: var(--accent-gold); }
-.stat-gold .hero-stat-num { color: var(--accent-gold); }
+/* Game image inside the shared detail modal */
+.video-modal-player.vm-image { background: var(--bg-card); overflow: hidden; isolation: isolate; }
+.video-modal-player.vm-image img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.video-modal-player.vm-image .vm-img-bg { object-fit: cover; filter: blur(24px) saturate(1.2) brightness(0.5); transform: scale(1.2); }
+.video-modal-player.vm-image .vm-img-art { object-fit: contain; }
+.vm-stats { display: flex; flex-wrap: wrap; gap: 2rem; margin: 0.25rem 0 1.5rem; }
+.vm-stat-num { font-family: var(--font-ui); font-size: 1.9rem; font-weight: 900; line-height: 1.1; color: var(--accent); }
+.vm-stat-num.warm { color: var(--accent-warm); }
+.vm-stat-label { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.2rem; }
 
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -597,6 +688,7 @@ section { padding: 2.25rem 2rem; max-width: 1100px; margin: 0 auto; position: re
 .video-modal-scroll {
   max-height: 90vh;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .video-modal-scroll::-webkit-scrollbar { width: 8px; }
 .video-modal-scroll::-webkit-scrollbar-track { background: var(--bg-card); }
@@ -1137,15 +1229,15 @@ footer a:hover { color: #5AE8AB; text-shadow: 0 0 12px var(--accent-glow-strong)
     grid-template-columns: 1fr;
   }
   section { padding: 2rem 1.25rem; }
-  .hero { padding: 7rem 1.25rem 4rem; }
+  .hero { padding: 6.5rem 1.25rem 2rem; }
   .services-grid { grid-template-columns: 1fr; }
   .toolkit-grid { grid-template-columns: 1fr; }
   .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
   .wave-divider svg { height: 32px; }
-  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .game-card { width: 300px; }
 }
 
 @media (max-width: 500px) {
   .portfolio-grid { grid-template-columns: 1fr; }
-  .hero-stats { grid-template-columns: 1fr; }
+  .game-card { width: 270px; }
 }
