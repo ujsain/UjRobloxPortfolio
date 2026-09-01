@@ -190,62 +190,64 @@ const GAMES = [
     platform: 'mobile',
     image: 'GameImage/ScrewJam.jpg',
     stats: [{ num: '100K+', label: 'Installs' }],
-    blurb: 'Mobile screw-puzzle game — unscrew, sort and clear the board. I built gameplay and level systems for a live title.',
+    blurb: 'A relaxing screw-sorting puzzle game with 100K+ installs — unscrew the pieces in the right order to clear each board.',
     tech: ['Unity', 'C#', 'Puzzle', 'Mobile'],
     body: [
       { h: 'What it is', p: 'A relaxing screw-sorting puzzle game with 100K+ installs — unscrew pieces in the right order to clear each board.' },
-      { h: 'What I worked on', p: 'Core puzzle mechanics, level progression and the systems that let designers ship new levels without touching code.' },
+      { h: 'What I worked on', p: 'Core puzzle mechanics, level progression, UI systems and the retention features that keep players coming back day after day.' },
     ],
+    links: [{ label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.screw.jam&hl=en_IN', primary: true }],
   },
   {
     title: 'Football World',
     platform: 'mobile',
     image: 'GameImage/FootBallWorld.png',
     stats: [{ num: '10M+', label: 'Installs' }],
-    blurb: 'Live mobile football title at Audify. I shipped gameplay and core systems that had to hold up for millions of players.',
+    blurb: 'A fast, pick-up-and-play mobile football game with 10M+ installs, built and operated at scale at Audify.',
     tech: ['Unity', 'C#', 'Live Ops', 'Mobile'],
     body: [
       { h: 'What it is', p: 'A fast, pick-up-and-play mobile football game with 10M+ installs, built and operated at scale at Audify.' },
-      { h: 'What I worked on', p: 'Gameplay features and the systems underneath them — match flow, progression hooks and the glue that lets new content ship without touching core code. Everything had to stay stable on low-end devices and survive live updates.' },
-      { h: 'What I learned', p: 'Working on a live title with real players: you ship behind flags, measure everything, and write code that the next person (or next feature) can build on without breaking what is live.' },
+      { h: 'What I worked on', p: 'Playable ads for user acquisition, banner-ad bug fixes, UI systems and particle effects — a mix of feature work and the polish that keeps a 10M-install live game running smoothly.' },
+      { h: 'What I learned', p: 'How to find my way around a very large codebase — locating the right place to make a change and shipping it without breaking what\'s already live.' },
     ],
-    links: [{ label: 'Play Store', url: '#', primary: true }],
+    links: [{ label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.audify.football&hl=en_IN', primary: true }],
   },
   {
     title: '+1 Sword Fight',
     platform: 'roblox',
     image: 'GameImage/%2B1SwordFight.jpg',
     stats: [{ num: '2M+', label: 'Visits' }, { num: '3K', label: 'Peak CCU' }],
-    blurb: 'Roblox sword-fighting experience that crossed 2M visits and peaked at 3K concurrent players.',
+    blurb: 'A +1-style Roblox sword-fighting game — train your strength, upgrade swords, unlock auras and take down ever-harder bosses.',
     tech: ['Roblox Engine', 'Luau', 'Gameplay', 'Live Ops'],
     body: [
-      { h: 'What it is', p: 'A Roblox sword-fighting game where every hit gives you +1 — simple loop, high replayability. Crossed 2M visits with a 3K peak CCU.' },
-      { h: 'What I worked on', p: 'Gameplay scripting and systems — combat feel, progression and the server logic that keeps fights fair at high player counts.' },
-      { h: 'What I learned', p: 'Designing for concurrency: server-authoritative rules, cheap replication, and keeping the round loop readable as features pile on.' },
+      { h: 'What it is', p: 'A +1-style Roblox sword-fighting game — train your strength, upgrade swords, unlock auras and push into new areas to take down progressively harder bosses. A simple core loop with high replayability.' },
+      { h: 'What I worked on', p: 'Obstacle systems, progression funnels and UI scripting, plus live bug-fixing on a production game with real players in it.' },
+      { h: 'What I learned', p: 'How to work inside a large, shared codebase. With a full team writing into the same project, I learned to write readable, consistent code that other developers could pick up and build on without friction.' },
     ],
-    links: [{ label: 'Play on Roblox', url: '#', primary: true }],
+    links: [{ label: 'Play on Roblox', url: 'https://www.roblox.com/games/71132391335247/1-Sword-Fighting-Escape', primary: true }],
   },
   {
     title: 'Tile Match',
     platform: 'mobile',
     image: 'GameImage/TileMatch.jpg',
     stats: [{ num: '100K+', label: 'Installs' }],
-    blurb: 'Mobile tile-matching puzzle game. I worked on gameplay and live systems reaching 100K+ installs.',
+    blurb: 'A classic triple-tile matching puzzle game with 100K+ installs — clear the board by matching sets of three.',
     tech: ['Unity', 'C#', 'Puzzle', 'Mobile'],
     body: [
       { h: 'What it is', p: 'A classic triple-tile matching puzzle game with 100K+ installs — clear the board by matching sets of three.' },
-      { h: 'What I worked on', p: 'Match logic, board generation and progression systems, tuned to run smoothly on low-end devices.' },
+      { h: 'What I worked on', p: 'UI systems and modular gameplay code — chest and quest systems, retention features, in-game analytics tracking, and steady bug-fixing on a live title.' },
     ],
+    links: [{ label: 'Play Store', url: 'https://play.google.com/store/apps/details?id=com.tilematch.game&hl=en_IN', primary: true }],
   },
   {
     title: 'Indian Village Shop [HORROR GAME]',
     platform: 'roblox',
     image: 'GameImage/Indian%20Village%20Shop.jpg',
     stats: [{ num: '700K+', label: 'Visits' }, { num: '2.5K', label: 'Peak CCU' }],
-    blurb: 'Roblox horror game — run the night shift at a remote village shop, follow the rules and survive. 700K+ visits and climbing.',
+    blurb: 'Roblox horror game — run the night shift at a remote village shop, follow the rules and survive each night to unlock the next.',
     tech: ['Roblox Engine', 'Luau', 'Horror', 'Gameplay'],
     body: [
-      { h: 'What it is', p: 'A rules-based horror experience on Roblox — you take the night shift at a small shop outside a remote Indian village. Serve customers chai and samosas, listen to the owner\'s phone calls, spot the suspicious ones, and survive each night to unlock the next. 700K+ visits with a 2.5K peak CCU.' },
+      { h: 'What it is', p: 'A rules-based horror experience on Roblox — you take the night shift at a small shop outside a remote Indian village. Serve customers chai and samosas, listen to the owner\'s phone calls, spot the suspicious ones, and survive each night to unlock the next.' },
       { h: 'What I worked on', p: 'Gameplay scripting and the systems behind the scares — night/event flow, customer and rule logic, and the atmosphere control (lighting and sound) that sells the tension.' },
     ],
     links: [{ label: 'Play on Roblox', url: 'https://www.roblox.com/games/90229512149046/Indian-Village-Shop', primary: true }],
@@ -349,7 +351,9 @@ if (heroTitle) {
   const track = document.getElementById('gamesTrack');
   if (!track) return;
 
-  const cardHTML = (g, i) => `
+  const cardHTML = (g, i) => {
+    const play = (g.links || []).find(l => l.primary && l.url && l.url !== '#');
+    return `
     <div class="game-card game-${g.platform}" data-game="${i}" role="button" tabindex="0" aria-label="${g.title} — read more">
       <div class="game-thumb">
         <img class="game-thumb-bg" src="${g.image}" alt="" aria-hidden="true" loading="lazy">
@@ -362,16 +366,24 @@ if (heroTitle) {
           ${g.stats.map(s => `<div class="game-stat"><div class="game-stat-num">${s.num}</div><div class="game-stat-label">${s.label}</div></div>`).join('')}
         </div>
         <p class="game-blurb">${g.blurb || ''}</p>
-        <span class="game-more">Read more <span aria-hidden="true">→</span></span>
+        <div class="game-actions">
+          <span class="game-more">Read more <span aria-hidden="true">→</span></span>
+          ${play ? `<a class="game-play" href="${play.url}" target="_blank" rel="noopener" aria-label="Play ${g.title} (opens in new tab)">Play <span aria-hidden="true">↗</span></a>` : ''}
+        </div>
       </div>
     </div>`;
+  };
 
   const group = `<div class="games-group">${GAMES.map(cardHTML).join('')}</div>`;
   track.innerHTML = group + group.replace('class="games-group"', 'class="games-group" aria-hidden="true"');
 
   track.querySelectorAll('.game-card').forEach(card => {
-    card.addEventListener('click', () => openGame(+card.dataset.game));
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.game-play')) return; // Play link navigates, doesn't open the modal
+      openGame(+card.dataset.game);
+    });
     card.addEventListener('keydown', (e) => {
+      if (e.target.closest('.game-play')) return;
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGame(+card.dataset.game); }
     });
   });

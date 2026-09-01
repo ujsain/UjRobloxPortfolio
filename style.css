@@ -449,8 +449,11 @@ nav.scrolled { border-bottom-color: rgba(61, 220, 151, 0.2); }
   font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;
   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
 }
-.game-more {
+.game-actions {
   margin-top: auto; padding-top: 0.9rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+}
+.game-more {
   font-family: var(--font-mono); font-size: 0.68rem;
   letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--accent);
@@ -459,6 +462,19 @@ nav.scrolled { border-bottom-color: rgba(61, 220, 151, 0.2); }
 }
 .game-mobile .game-more { color: var(--accent-warm); }
 .game-card:hover .game-more { gap: 0.7rem; }
+
+.game-play {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.35rem 0.75rem; border-radius: 2px;
+  color: var(--accent); border: 1px solid var(--accent);
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s;
+}
+.game-play:hover { background: var(--accent); color: var(--bg-primary); }
+.game-mobile .game-play { color: var(--accent-warm); border-color: var(--accent-warm); }
+.game-mobile .game-play:hover { background: var(--accent-warm); color: var(--bg-primary); }
 
 /* Game image inside the shared detail modal */
 .video-modal-player.vm-image { background: var(--bg-card); overflow: hidden; isolation: isolate; }
