@@ -65,7 +65,7 @@ end`,
     ],
   },
 
-  gh4Y8P1VXSk: {
+  te_QB1It9s8: {
     title: '1 IQ vs 9999 IQ',
     tech: ['Roblox Engine', 'Lua', 'Game Architecture'],
     body: [
